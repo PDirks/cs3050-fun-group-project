@@ -10,9 +10,9 @@ Well-formed is defined as when the following doesn't happen:
 1.There are two job applicants A 1 and A 2 and a department D such that
 * A 1 is allocated to D, and
 * A 2 is not allocated to any department, and
-* D prefers A 2 to A 1 .
+* D prefers A 2 to A 1
 
-2. There are two job applicants A 1 and A 2 and two departments D 1 and D 2 such that
+2.There are two job applicants A 1 and A 2 and two departments D 1 and D 2 such that
 * A 1 is allocated to D 1 , and
 * A 2 is allocated to D 2 , and
 * D 1 prefers A 2 to A 1 and
