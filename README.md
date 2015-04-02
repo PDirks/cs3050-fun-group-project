@@ -1,5 +1,5 @@
 #cs3050 group-project
-A big project for cs3050. Ful requirements found [here](https://github.com/PDirks/cs3050-fun-group-project/blob/master/requirements/guidelines.pdf)
+A big project for cs3050. Full requirements found [here](https://github.com/PDirks/cs3050-fun-group-project/blob/master/requirements/guidelines.pdf)
 
 ###Prompt
 You have to find a way of allocating each job applicant to at most one department in such a way that all the vacancies
