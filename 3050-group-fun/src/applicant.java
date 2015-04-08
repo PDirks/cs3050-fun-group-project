@@ -25,10 +25,12 @@ public class applicant {
 		pref.add(d);
 	}
 	
+/*
+ * getters and setters
+ */
 	String getName(){
 		return name;
 	}
-	
 	ArrayList<dept> getPref(){
 		return pref;
 	}
