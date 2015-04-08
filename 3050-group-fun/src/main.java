@@ -20,6 +20,15 @@ public class main {
 
 		read.readFile( read.getFile() );
 		
+		ArrayList<applicant> apps = read.getApps();
+		ArrayList<dept> depts = read.getDepts();
+		
+		for( applicant a : apps ){
+			a.print();
+		}
+		for( dept d : depts ){
+			//d.print();
+		}
 	}
 
 }
