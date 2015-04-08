@@ -13,21 +13,28 @@ import java.io.FileNotFoundException;
 
 public class dept {
 	private String name;
-	private ArrayList<applicant> pref;
+	public ArrayList<applicant> pref;
+	private int open;
 	
-	dept( String name, ArrayList<applicant> preferences ){
+	dept( String name, int positions ){
 		this.name = name;
-		pref = preferences;
+		this.open = positions;
 	}
 
 	void addPref( applicant a ){
 		pref.add(a);
 	}
 
+/*
+ * Getters and setters
+ */
 	ArrayList<applicant> getPref(){
 		return pref;
 	}
 	String getName(){
 		return name;
+	}
+	int getOpenPositions(){
+		return open;
 	}
 }
