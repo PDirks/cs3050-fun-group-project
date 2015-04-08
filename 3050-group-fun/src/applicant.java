@@ -7,18 +7,16 @@
  */
 import java.util.Scanner;
 import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
 public class applicant {
 
 	private String name;
-	private ArrayList<dept> pref;
+	private ArrayList<dept> pref = new ArrayList<dept>();
 	
-	applicant( String name,ArrayList<dept> preferences){
+	applicant( String name ){
 		this.name = name;
-		this.pref = preferences;
 	}
 	
 	void addDept( dept d ){
@@ -34,4 +32,11 @@ public class applicant {
 	ArrayList<dept> getPref(){
 		return pref;
 	}
+	void print(){
+		System.out.println("applicant: " + name + "\n\tpreferences:");
+		for( dept d : pref ){
+			System.out.println("\t\t"+d.getName());
+		}
+	}
+	
 }
