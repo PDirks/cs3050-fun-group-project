@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 
 public class dept {
 	private String name;
-	public ArrayList<applicant> pref;
+	public ArrayList<applicant> pref = new ArrayList<applicant>();
 	private int open;
 	
 	dept( String name, int positions ){
@@ -36,5 +36,12 @@ public class dept {
 	}
 	int getOpenPositions(){
 		return open;
+	}
+	
+	void print(){
+		System.out.println("dept: " + name + "\n\topenings: " + open + "\n\tpreferences:");
+		for( applicant a : pref ){
+			System.out.println("\t\t"+a.getName());
+		}
 	}
 }
