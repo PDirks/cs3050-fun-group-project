@@ -9,15 +9,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
-//I was here....hahehe
 
 public class applicant {
 
 	private String name;
 	private ArrayList<dept> pref = new ArrayList<dept>();
+	int assigned;
 	
 	applicant( String name ){
 		this.name = name;
+		assigned = 0;
 	}
 	
 	void addDept( dept d ){
@@ -27,6 +28,9 @@ public class applicant {
 /*
  * getters and setters
  */
+	int getAssigned() {
+		return assigned;
+	}
 	String getName(){
 		return name;
 	}
