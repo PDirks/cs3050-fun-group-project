@@ -22,7 +22,9 @@ Well-formed is defined as when the following doesn't happen:
 
 ![](https://raw.githubusercontent.com/PDirks/cs3050-fun-group-project/master/requirements/3050-activity.png?token=AGaMKSTdS1-7rO7-sIHhfLKO72SaNaj9ks5VJqGcwA%3D%3D)
 
-Algorithm magic will resemble the [stable marriage algorithm](http://en.wikipedia.org/wiki/Stable_marriage_problem#Algorithm)
+Algorithm magic will resemble the ~~[stable marriage algorithm](http://en.wikipedia.org/wiki/Stable_marriage_problem#Algorithm)~~ 
+
+[hospital/resident program](http://www.nrmp.org/wp-content/uploads/2014/05/Run-A-Match.pdf)
 
 ###Input Layout
 * Each Input file starts with the keyword “Vacancies and Departments” in the first line. The next line is blank.
