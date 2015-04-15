@@ -27,9 +27,9 @@ public class dept {
 	}
 	
 	void fill(applicant a){
-		openings.add(a);
+		openings.add(a);	// assigns applicant
 		a.assigned = 1;
-		open -= 1;
+		open -= 1;	// decrease opening positions
 	}
 	
 	void free(int index) {
