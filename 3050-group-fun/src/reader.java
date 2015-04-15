@@ -121,7 +121,7 @@ public class reader {
 							System.out.println("\tadding[" + line + "]");	// debug
 							line =  line.replaceAll("\\s+$", "");
 							for(dept d : depts){
-								if( d.getName().equals(line)){
+								if( d.getName().equals(line)){ 
 									apps.get(i).addDept( d );
 								}
 							}
