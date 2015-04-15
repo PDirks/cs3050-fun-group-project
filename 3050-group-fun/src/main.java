@@ -16,13 +16,11 @@ public class main {
 		
 		System.out.println("program!");
 		reader read = new reader( "test.txt" );
-		
 
 		read.readFile( read.getFile() );
 		
 		ArrayList<applicant> apps = read.getApps();
 		ArrayList<dept> depts = read.getDepts();
-		
 		
 		for( applicant a : apps ){
 			a.print();
@@ -30,7 +28,7 @@ public class main {
 		for( dept d : depts ){
 			d.print();
 		}
-		
+			
 		System.out.println();
 		
 		matcher(apps, depts);

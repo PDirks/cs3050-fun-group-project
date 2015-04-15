@@ -15,6 +15,7 @@ public class dept {
 	private String name;
 	public ArrayList<applicant> pref = new ArrayList<applicant>();
 	private ArrayList<applicant> openings = new ArrayList<applicant>();
+
 	private int open;
 	
 	dept( String name, int positions ){
@@ -65,4 +66,5 @@ public class dept {
 			System.out.println("\t\t"+a.getName());
 		}
 	}
+
 }

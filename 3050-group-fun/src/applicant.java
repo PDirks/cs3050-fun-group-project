@@ -31,6 +31,7 @@ public class applicant {
 	int getAssigned() {
 		return assigned;
 	}
+
 	String getName(){
 		return name;
 	}
