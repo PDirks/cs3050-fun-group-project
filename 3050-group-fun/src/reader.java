@@ -90,6 +90,7 @@ public class reader {
 				 */
 				
 				System.out.println("preferences fetched: " + line);	// debug
+
 				temp = line.split("[ ]");
 				String match;
 				for(int i = 0; i < depts.size(); i++){
@@ -118,8 +119,9 @@ public class reader {
 						// process preference list
 						while( !line.isEmpty() ){
 							System.out.println("\tadding[" + line + "]");	// debug
+							line =  line.replaceAll("\\s+$", "");
 							for(dept d : depts){
-								if( d.getName().equals(line) ){
+								if( d.getName().equals(line)){
 									apps.get(i).addDept( d );
 								}
 							}

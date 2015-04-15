@@ -7,7 +7,6 @@
  */
 import java.util.Scanner;
 import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -27,8 +26,58 @@ public class main {
 			a.print();
 		}
 		for( dept d : depts ){
-			//d.print();
+			d.print();
 		}
+	
+
+		
+		System.out.println();
+		
+		matcher(apps, depts);
+		
+		for(dept dd : depts ) {
+			dd.printHires();
+		}
+		
 	}
 
+	/*
+	 * Start of the matching algorithm, definitely still needs more work seems to run infinitely right now
+	 * and needs to check all of the applicants favorites, not just the top ones
+	 * 
+	 */
+	static void matcher(ArrayList<applicant> apps, ArrayList<dept> depts) {
+		System.out.println("Running the matching algorithm....\n\n");
+		
+		for( dept d : depts ){
+			while (d.getOpenPositions() != 0) {
+				int c = 0;
+				applicant highest = d.getPref().get(c);
+
+				if(highest.getAssigned() == 0)	 {
+					d.fill(highest);
+					System.out.println("matching (highest) "+ d.getName()+" with "+ highest.getName());	// debug
+				} 
+				else {
+					/*
+					 * infinate loop happening somewhere in here...
+					 */
+					if(highest.getPref().get(0) != d) {
+						dept favorite = highest.getPref().get(0);
+						
+						System.out.println("matching (favorite) "+ favorite.getName() + " with "+ highest.getName());
+						
+						if(favorite.getOpenPositions() == 0){
+							favorite.fill(highest);
+						}
+					} 
+					else {
+						break;
+					}// end else
+				}
+			
+			++c;	
+			}// end while
+		}// end for
+	}
 }
