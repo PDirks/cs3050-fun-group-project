@@ -54,20 +54,30 @@ public class main {
 				int c = 0;
 				applicant highest = d.getPref().get(c);
 
-			if(highest.getAssigned() == 0)	 {
-				d.fill(highest);
-			} else {
-				if(highest.getPref().get(0) != d) {
-					dept favorite = highest.getPref().get(0);
-					if(favorite.getOpenPositions() == 0)
-						favorite.fill(highest);
-				} else {
-					break;
+				if(highest.getAssigned() == 0)	 {
+					d.fill(highest);
+					System.out.println("matching (highest) "+ d.getName()+" with "+ highest.getName());	// debug
+				} 
+				else {
+					/*
+					 * infinate loop happening somewhere in here...
+					 */
+					if(highest.getPref().get(0) != d) {
+						dept favorite = highest.getPref().get(0);
+						
+						System.out.println("matching (favorite) "+ favorite.getName() + " with "+ highest.getName());
+						
+						if(favorite.getOpenPositions() == 0){
+							favorite.fill(highest);
+						}
+					} 
+					else {
+						break;
+					}// end else
 				}
-			}
 			
 			++c;	
-			}
-		}
+			}// end while
+		}// end for
 	}
 }
