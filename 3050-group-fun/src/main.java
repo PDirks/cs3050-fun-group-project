@@ -23,23 +23,23 @@ public class main {
 		ArrayList<dept> depts = read.getDepts();
 		
 		for( applicant a : apps ){
-			a.print();
+			//a.print();
 		}
 		for( dept d : depts ){
-			d.print();
+			//d.print();
 		}
-	
-
 		
 		System.out.println();
 		
-		matcher(apps, depts);
+		//matcher(apps, depts);
+		
+		multMatcher(apps, depts);
 		
 		for(dept dd : depts ) {
-			dd.printHires();
+			//dd.printHires();
 		}
 		
-	}
+	}// end main
 
 	/*
 	 * Start of the matching algorithm, definitely still needs more work seems to run infinitely right now
@@ -54,7 +54,7 @@ public class main {
 				int c = 0;
 				applicant highest = d.getPref().get(c);
 
-				if(highest.getAssigned() == 0)	 {
+				if(highest.getAssigned() == true)	 {
 					d.fill(highest);
 					System.out.println("matching (highest) "+ d.getName()+" with "+ highest.getName());	// debug
 				} 
@@ -80,4 +80,50 @@ public class main {
 			}// end while
 		}// end for
 	}
-}
+
+	static void multMatcher( ArrayList<applicant> apps, ArrayList<dept> depts){
+		
+		ArrayList<applicant> openApps = new ArrayList<applicant>(apps);	// track unassigned applications
+		
+		for( applicant a : apps ){
+			if( !openApps.contains(a) ){
+				continue;
+			}
+			System.out.println("now working on "+a.getName());	// debug
+			dept d = a.getPref().get(a.getPrefRank());
+			// first we check if the top prefered has open spots
+			if( a.getPref().get(a.getPrefRank()).getOpenPositions() != 0 ){
+				System.out.println("\t"+a.getName()+"would like to get matched with "+d.getName()+" which has open spots");
+				// now we check if 'a' is even ranked by the dept
+				if( d.getPref().contains(a) ){
+					// a is ranked, and dept has spots open, so we assign
+					d.fill(a);
+					// remove 'a' from unassigned list
+					openApps.remove(a);
+					System.out.println("\t"+a.getName()+" is matched with "+d.getName());	// debug
+					continue;
+				}
+				else{
+					// 'a' is not prefered by the company, so we lower a's preference
+					a.setPrefRank( a.getPrefRank() - 1);
+					System.out.println(a.getName()+"is not prefered by"+d.getName()+" lowering prefNum to "+ a.getPrefRank());
+				}	
+			}// end check if prefered dept has open spots
+			else{
+				System.out.println("\t"+d.getName()+" has no open spots. Checking if "+a.getName()+" outranks anybody...");
+				System.out.println("\tchecking dept pref of "+d.getLowestFilledRank()+" vs applicant pref of "+d.getPref().lastIndexOf(a));
+				if( d.getLowestFilledRank() < d.getPref().lastIndexOf(a) ){
+					
+					
+					
+				}
+			}// dept has no open spots
+			
+			
+			
+		}// end foreach
+		
+		
+	}
+	
+}// end class main

@@ -14,12 +14,13 @@ public class applicant {
 
 	private String name;
 	private ArrayList<dept> pref = new ArrayList<dept>();
+	private boolean assigned;
 	
-	int assigned;
+	private int prefRank = 1;
 	
 	applicant( String name ){
 		this.name = name;
-		assigned = 0;
+		assigned = false;
 	}
 	
 	void addDept( dept d ){
@@ -29,8 +30,19 @@ public class applicant {
 /*
  * getters and setters
  */
-
-	int getAssigned() {
+	int getPrefRank(){
+		return prefRank;
+	}
+	
+	void setPrefRank( int rank ){
+		prefRank = rank;
+	}
+	
+	void setAssigned(boolean val){
+		this.assigned = val;
+	}
+	
+	boolean getAssigned() {
 		return assigned;
 	}
 

@@ -15,9 +15,10 @@ public class dept {
 	private String name;
 	public ArrayList<applicant> pref = new ArrayList<applicant>();
 
-	private ArrayList<applicant> openings = new ArrayList<applicant>();
+	private ArrayList<applicant> openings = new ArrayList<applicant>();	// people assigned to positions
 
 	private int open;
+	private int lowestFilledRank;
 	
 	dept( String name, int positions ){
 		this.name = name;
@@ -30,8 +31,35 @@ public class dept {
 	
 	void fill(applicant a){
 		openings.add(a);	// assigns applicant
-		a.assigned = 1;
+		a.setAssigned(true);
 		open -= 1;	// decrease opening positions
+		if( lowestFilledRank > pref.lastIndexOf(a))	// update lowestFilledRank
+			lowestFilledRank = pref.lastIndexOf(a);
+	}
+	
+	boolean remove(applicant a){
+		if( !openings.contains(a) ){
+			return false;
+		}
+		openings.remove(a);
+		a.setAssigned(false);
+		open +=1;
+		/*
+		 * need to recalculate the lowest pref rank in the openings arrayList...
+		 */
+		if(openings.size()==0){
+			lowestFilledRank = 100;
+		}
+		else{
+			int tempLowest = -1;
+			for( applicant tempApp : openings ){
+				if( pref.lastIndexOf(tempApp) > tempLowest ){
+					tempLowest = pref.lastIndexOf(tempApp);
+				}
+			}
+			lowestFilledRank = tempLowest;
+		}
+		return true;
 	}
 	
 	void free(int index) {
@@ -51,7 +79,9 @@ public class dept {
 	int getOpenPositions(){
 		return open;
 	}
-	
+	int getLowestFilledRank(){
+		return lowestFilledRank;
+	}
 	void print(){
 		System.out.println("dept: " + name + "\n\topenings: " + open + "\n\tpreferences:");
 		for( applicant a : pref ){
