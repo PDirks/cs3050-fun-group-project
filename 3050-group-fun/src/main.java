@@ -28,7 +28,6 @@ public class main {
 		for( dept d : depts ){
 			//d.print();
 		}
-		
 		System.out.println();
 		
 		//matcher(apps, depts);

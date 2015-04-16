@@ -17,6 +17,7 @@ public class applicant {
 	private boolean assigned;
 	
 	private int prefRank = 1;
+
 	
 	applicant( String name ){
 		this.name = name;
