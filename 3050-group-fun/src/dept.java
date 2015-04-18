@@ -37,6 +37,19 @@ public class dept {
 			lowestFilledRank = pref.lastIndexOf(a);
 	}
 	
+	applicant getLowestApplicant(){
+		int lowest = 0;
+		
+		for( applicant a : openings ){
+			if( pref.lastIndexOf(a) > lowest ){
+				lowest = pref.lastIndexOf(a); 
+			}
+			
+		}
+		return pref.get(lowest);
+		
+	}// end get lowest Applicant
+	
 	boolean remove(applicant a){
 		if( !openings.contains(a) ){
 			return false;
