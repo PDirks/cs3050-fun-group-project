@@ -80,49 +80,76 @@ public class main {
 		}// end for
 	}
 
+	static void deptMatcher( ArrayList<applicant> apps, ArrayList<dept> depts){
+		
+		ArrayList<applicant> openApps = new ArrayList<applicant>(apps);	// track unassigned applications
+		ArrayList<applicant> filledApps = new ArrayList<applicant>();	// track unassigned applications
+		ArrayList<dept> openDepts = new ArrayList<dept>(depts);
+		ArrayList<dept> filledDepts = new ArrayList<dept>();
+		
+		while( openDepts.size() != 0 ){
+			int index = 0;
+			dept activeDept = openDepts.get(0);
+			while( index < activeDept.getPref().size()){
+				
+				// check if candidate is unassigned
+				if( activeDept.getPref().get( index ).getAssigned() == false ){
+					// assign candidate to position
+					applicant added = activeDept.getPref().get( index );
+					activeDept.fill( added );
+					filledApps.add( added );
+					openApps.remove(added);
+					if( activeDept.getOpenPositions() == 0 ){	// if no more positions, remove from openDept list
+						filledDepts.add(activeDept);
+						openDepts.remove(activeDept);
+					}
+				}// end if pref is unassigned
+			
+			}// end iterate through pref
+			
+		}// end iterate through open depts
+		
+		/*
+		 *  not sure where I'm going with this......
+		 */
+		
+		
+	}// end deptMatcher
+
 	static void multMatcher( ArrayList<applicant> apps, ArrayList<dept> depts){
 		
 		ArrayList<applicant> openApps = new ArrayList<applicant>(apps);	// track unassigned applications
+		ArrayList<applicant> filledApps = new ArrayList<applicant>();	// track unassigned applications
+		ArrayList<dept> openDepts = new ArrayList<dept>(depts);
+		ArrayList<dept> filledDepts = new ArrayList<dept>();
 		
-		for( applicant a : apps ){
-			if( !openApps.contains(a) ){
-				continue;
-			}
-			System.out.println("now working on "+a.getName());	// debug
-			dept d = a.getPref().get(a.getPrefRank());
-			// first we check if the top prefered has open spots
-			if( a.getPref().get(a.getPrefRank()).getOpenPositions() != 0 ){
-				System.out.println("\t"+a.getName()+"would like to get matched with "+d.getName()+" which has open spots");
-				// now we check if 'a' is even ranked by the dept
-				if( d.getPref().contains(a) ){
-					// a is ranked, and dept has spots open, so we assign
-					d.fill(a);
-					// remove 'a' from unassigned list
-					openApps.remove(a);
-					System.out.println("\t"+a.getName()+" is matched with "+d.getName());	// debug
-					continue;
-				}
-				else{
-					// 'a' is not prefered by the company, so we lower a's preference
-					a.setPrefRank( a.getPrefRank() - 1);
-					System.out.println(a.getName()+"is not prefered by"+d.getName()+" lowering prefNum to "+ a.getPrefRank());
-				}	
-			}// end check if prefered dept has open spots
-			else{
-				System.out.println("\t"+d.getName()+" has no open spots. Checking if "+a.getName()+" outranks anybody...");
-				System.out.println("\tchecking dept pref of "+d.getLowestFilledRank()+" vs applicant pref of "+d.getPref().lastIndexOf(a));
-				if( d.getLowestFilledRank() < d.getPref().lastIndexOf(a) ){
-					
+		while( openDepts.size() != 0 ){
+			int appindex = 0;
+			applicant currentApp = openApps.get(appindex);
+			int currentRank = 0;
+			
+			// iterate through until all preferences are used
+			while(currentApp.getPref().size() > currentRank){
+				dept tempDept = currentApp.getPref().get(currentRank);
+				if( currentApp.getPref().get(currentRank).getOpenPositions() != 0 ){
+					tempDept.fill(currentApp);
+					if(tempDept.getOpenPositions() == 0){
+						filledDepts.add(tempDept);
+						openDepts.remove(tempDept);
+					}
+				}// end if open
+				else if( tempDept.pref.lastIndexOf(currentApp) < tempDept.getLowestFilledRank() ){
+					// check if application has better pref rank than current hires
+					applicant lower = tempDept.getLowestApplicant();
 					
 					
 				}
-			}// dept has no open spots
+				
+				currentRank++;
+			}// end while
 			
-			
-			
-		}// end foreach
+		}// end while openspots still present
 		
-		
-	}
+}
 	
 }// end class main
