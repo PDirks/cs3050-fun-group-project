@@ -33,14 +33,18 @@ public class dept {
 		openings.add(a);	// assigns applicant
 		a.setAssigned(true);
 		open -= 1;	// decrease opening positions
-		if( lowestFilledRank > pref.lastIndexOf(a))	// update lowestFilledRank
+		if( lowestFilledRank < pref.lastIndexOf(a)){	// update lowestFilledRank
 			lowestFilledRank = pref.lastIndexOf(a);
+		}
+		System.out.println("[debug] "+this.name+" lowest rank now "+this.lowestFilledRank);
+		
 	}
 	
 	applicant getLowestApplicant(){
 		int lowest = 0;
 		
 		for( applicant a : openings ){
+			System.out.println("[debug] updating lowest rank ("+this.name+")");	// debug
 			if( pref.lastIndexOf(a) > lowest ){
 				lowest = pref.lastIndexOf(a); 
 			}

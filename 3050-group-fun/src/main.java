@@ -23,7 +23,7 @@ public class main {
 		ArrayList<dept> depts = read.getDepts();
 		
 		for( applicant a : apps ){
-			//a.print();
+			a.print();
 		}
 		for( dept d : depts ){
 			//d.print();
@@ -35,15 +35,17 @@ public class main {
 		multMatcher(apps, depts);
 		
 		for(dept dd : depts ) {
-			//dd.printHires();
+			dd.printHires();
 		}
+		
+		System.out.println("done");
 		
 	}// end main
 
 	/*
+	 * matcher():
 	 * Start of the matching algorithm, definitely still needs more work seems to run infinitely right now
 	 * and needs to check all of the applicants favorites, not just the top ones
-	 * 
 	 */
 	static void matcher(ArrayList<applicant> apps, ArrayList<dept> depts) {
 		System.out.println("Running the matching algorithm....\n\n");
@@ -80,6 +82,11 @@ public class main {
 		}// end for
 	}
 
+	/*
+	 * deptMatcher():
+	 * Not sure where I was going with this function. Was looking at running the match by working through dept
+	 * preferences. Didn't delete it mostly out of spite.
+	 */
 	static void deptMatcher( ArrayList<applicant> apps, ArrayList<dept> depts){
 		
 		ArrayList<applicant> openApps = new ArrayList<applicant>(apps);	// track unassigned applications
@@ -116,6 +123,10 @@ public class main {
 		
 	}// end deptMatcher
 
+	/*
+	 * multMatcher():
+	 * Another attempt at the matching algorithm.
+	 */
 	static void multMatcher( ArrayList<applicant> apps, ArrayList<dept> depts){
 		
 		ArrayList<applicant> openApps = new ArrayList<applicant>(apps);	// track unassigned applications
@@ -123,33 +134,57 @@ public class main {
 		ArrayList<dept> openDepts = new ArrayList<dept>(depts);
 		ArrayList<dept> filledDepts = new ArrayList<dept>();
 		
+		// run loop while there are still depts w/o matches
 		while( openDepts.size() != 0 ){
-			int appindex = 0;
-			applicant currentApp = openApps.get(appindex);
-			int currentRank = 0;
-			
-			// iterate through until all preferences are used
-			while(currentApp.getPref().size() > currentRank){
-				dept tempDept = currentApp.getPref().get(currentRank);
-				if( currentApp.getPref().get(currentRank).getOpenPositions() != 0 ){
-					tempDept.fill(currentApp);
-					if(tempDept.getOpenPositions() == 0){
-						filledDepts.add(tempDept);
-						openDepts.remove(tempDept);
-					}
-				}// end if open
-				else if( tempDept.pref.lastIndexOf(currentApp) < tempDept.getLowestFilledRank() ){
-					// check if application has better pref rank than current hires
-					applicant lower = tempDept.getLowestApplicant();
-					
-					
-				}
+			for( applicant currentApp : apps ){
+				int appindex = 0;
+				//applicant currentApp = openApps.get(appindex);
+				System.out.println("[debug] currentApp: "+currentApp.getName());	// debug
+				// don't use currentApp if it is already assigned
+				/*if( currentApp.getAssigned() == true ){
+					System.out.println("[debug] bumping currentApp");	// debug
+					openApps.remove(currentApp);
+					currentApp = openApps.get(appindex++);
+				}*/
+				int currentRank = 0;
 				
-				currentRank++;
-			}// end while
-			
+				// iterate through until all preferences are used
+				while(currentApp.getPref().size() > currentRank && currentApp.getAssigned() == false){
+					// where tempDept is the highest preference of applicant currentApp
+					dept tempDept = currentApp.getPref().get(currentRank);
+					
+					// if the tempDept has open positions
+					if( tempDept.getOpenPositions() != 0 ){
+						tempDept.fill(currentApp);
+						openApps.remove(currentApp);
+						
+						System.out.println("[debug] assigning "+ currentApp.getName() + " to "+tempDept.getName());	// debug
+						if(tempDept.getOpenPositions() == 0){
+							filledDepts.add(tempDept);
+							openDepts.remove(tempDept);
+						}
+					}// end if open
+					// check if application has better pref rank than current hires
+					else if( tempDept.pref.lastIndexOf(currentApp) < tempDept.getLowestFilledRank() ){
+						System.out.println("[debug] checking indexes... ("+currentApp.getName()+" vs "+tempDept.getName()+") "
+								+tempDept.pref.lastIndexOf(currentApp) 
+								+ " vs "+tempDept.getLowestFilledRank());	// debug
+						
+						applicant lower = tempDept.getLowestApplicant();
+						openApps.add(lower);
+						if(tempDept.remove(lower) == false){
+							System.out.println("[debug] error: "+lower.getName()+" not in assigned positions");
+						}
+						tempDept.fill(currentApp);
+							
+					}
+					
+					currentRank++;
+				}// end while
+				//openApps.remove(currentApp);
+			}// end foreach of applicants
 		}// end while openspots still present
 		
-}
+	}// end multMatcher()
 	
 }// end class main
