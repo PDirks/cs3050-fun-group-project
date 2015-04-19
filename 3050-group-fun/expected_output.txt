@@ -1,0 +1,8 @@
+extected output...
+
+Ax:
+	John Doe
+	Jane Doe
+
+By:
+	Min Doe
