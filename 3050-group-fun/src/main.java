@@ -5,17 +5,24 @@
  * Cody Cameron
  * Peter Dirks
  */
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.Scanner;		// taking user input
+import java.util.ArrayList;		// managing inputed applicants and depts
 
 public class main {
 
 	public static void main(String[] args) {
-		
-		System.out.println("program!");
-		reader read = new reader( "test.txt" );
+		String input;
+		/* 
+		 * let user input which file to work on, for now we'll railroad it to "test.txt", but will need to have
+		 * interactivity for the final submission build
+		 */
+		/*
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter name of file to read: ");
+		input = sc.nextLine();
+		*/
+		input = "test.txt";
+		reader read = new reader( input );
 
 		read.readFile( read.getFile() );
 		

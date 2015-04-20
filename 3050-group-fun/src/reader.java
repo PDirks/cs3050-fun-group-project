@@ -8,12 +8,12 @@
  * Peter Dirks
  */
 
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.lang.Integer;
+import java.util.Scanner;			// for reading from file
+import java.util.ArrayList;			// for managing applicants and depts
+import java.lang.Integer;			// conversion business
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.File;					// for opening files
+import java.io.FileNotFoundException;	// error handling with files
 
 public class reader {
 
@@ -89,7 +89,7 @@ public class reader {
 				 *  ii. then add to preference list 
 				 */
 				
-				System.out.println("preferences fetched: " + line);	// debug
+				//System.out.println("preferences fetched: " + line);	// debug
 
 				temp = line.split("[ ]");
 				String match;
@@ -118,7 +118,7 @@ public class reader {
 						
 						// process preference list
 						while( !line.isEmpty() ){
-							System.out.println("\tadding[" + line + "]");	// debug
+							//System.out.println("\tadding[" + line + "]");	// debug
 							line =  line.replaceAll("\\s+$", "");
 							for(dept d : depts){
 								if( d.getName().equals(line)){ 

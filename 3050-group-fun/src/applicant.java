@@ -5,10 +5,7 @@
  * Cody Cameron
  * Peter Dirks
  */
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.ArrayList;		// for object logic
 
 public class applicant {
 
