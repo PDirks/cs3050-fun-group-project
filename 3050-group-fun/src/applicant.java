@@ -50,6 +50,7 @@ public class applicant {
 	ArrayList<dept> getPref(){
 		return pref;
 	}
+	//prints preferences
 	void print(){
 		System.out.println("applicant: " + name + "\n\tpreferences:");
 		for( dept d : pref ){

@@ -14,11 +14,13 @@ public class dept {
 	private ArrayList<applicant> openings = new ArrayList<applicant>();	// people assigned to positions
 
 	private int open;
+	private int openpermanent;
 	private int lowestFilledRank;
 	
 	dept( String name, int positions ){
 		this.name = name;
 		this.open = positions;
+		this.openpermanent = positions;
 	}
 
 	void addPref( applicant a ){
@@ -29,38 +31,53 @@ public class dept {
 		openings.add(a);	// assigns applicant
 		a.setAssigned(true);
 		open -= 1;	// decrease opening positions
-		if( lowestFilledRank < pref.lastIndexOf(a)){	// update lowestFilledRank
+		
+		
+		//Commenting this out for now so I can try something...
+		/*if( lowestFilledRank < pref.lastIndexOf(a)){	// update lowestFilledRank
 			lowestFilledRank = pref.lastIndexOf(a);
 		}
-		System.out.println("[debug] "+this.name+" lowest rank now "+this.lowestFilledRank);
+		System.out.println("[debug] "+this.name+" lowest rank now "+this.lowestFilledRank);*/
 		
 	}
 	
 	applicant getLowestApplicant(){
-		int lowest = 0;
+		//int lowest = 0;
 		
+		int x = this.getOpenPositions();
+		int y = this.getOpenPermanent();
+	
+		return openings.get(y-x-1);
+		
+		/* Commenting out to try things...
 		for( applicant a : openings ){
 			System.out.println("[debug] updating lowest rank ("+this.name+")");	// debug
 			if( pref.lastIndexOf(a) > lowest ){
 				lowest = pref.lastIndexOf(a); 
 			}
 			
-		}
-		return pref.get(lowest);
+		}*/
+		
+		//return pref.get(lowest);
 		
 	}// end get lowest Applicant
 	
-	boolean remove(applicant a){
-		if( !openings.contains(a) ){
+	void remove(applicant a){
+		//Commented out to try some things....
+		/*if( !openings.contains(a) ){
 			return false;
-		}
+		}*/
+		
+		
 		openings.remove(a);
 		a.setAssigned(false);
 		open +=1;
+		
+		
 		/*
 		 * need to recalculate the lowest pref rank in the openings arrayList...
 		 */
-		if(openings.size()==0){
+		/*if(openings.size()==0){
 			lowestFilledRank = 100;
 		}
 		else{
@@ -72,7 +89,7 @@ public class dept {
 			}
 			lowestFilledRank = tempLowest;
 		}
-		return true;
+		return true;*/
 	}
 	
 	void free(int index) {
@@ -86,6 +103,9 @@ public class dept {
 	ArrayList<applicant> getPref(){
 		return pref;
 	}
+	ArrayList<applicant> getOpenings() {
+		return openings;
+	}
 	String getName(){
 		return name;
 	}
@@ -94,6 +114,9 @@ public class dept {
 	}
 	int getLowestFilledRank(){
 		return lowestFilledRank;
+	}
+	int getOpenPermanent(){
+		return openpermanent;
 	}
 	void print(){
 		System.out.println("dept: " + name + "\n\topenings: " + open + "\n\tpreferences:");

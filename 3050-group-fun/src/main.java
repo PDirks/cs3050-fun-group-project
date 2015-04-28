@@ -37,9 +37,9 @@ public class main {
 		}
 		System.out.println();
 		
-		//matcher(apps, depts);
+		matcher(apps, depts);
 		
-		multMatcher(apps, depts);
+		//multMatcher(apps, depts);
 		
 		for(dept dd : depts ) {
 			dd.printHires();
@@ -51,42 +51,81 @@ public class main {
 
 	/*
 	 * matcher():
-	 * Start of the matching algorithm, definitely still needs more work seems to run infinitely right now
-	 * and needs to check all of the applicants favorites, not just the top ones
+	 * Algorithm based on the wiki page with a few additions - i feel like this is close to perfect...I hope
 	 */
 	static void matcher(ArrayList<applicant> apps, ArrayList<dept> depts) {
 		System.out.println("Running the matching algorithm....\n\n");
 		
-		for( dept d : depts ){
-			while (d.getOpenPositions() != 0) {
+		//For all applicants....
+		for( applicant a : apps ){
+		
+			//while applicant is not assigned....
+			while (a.getAssigned() == false) {
+				//Counters used to compare preferences
 				int c = 0;
-				applicant highest = d.getPref().get(c);
+				int cc = 0;
+				dept highest = a.getPref().get(c);
 
-				if(highest.getAssigned() == true)	 {
-					d.fill(highest);
-					System.out.println("matching (highest) "+ d.getName()+" with "+ highest.getName());	// debug
+				//If highest ranking dept is free for the applicant...
+				if(highest.getOpenPositions() != 0)	 {
+					
+					highest.fill(a);
+					System.out.println("matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
 				} 
-				else {
-					/*
-					 * infinate loop happening somewhere in here...
-					 */
-					if(highest.getPref().get(0) != d) {
-						dept favorite = highest.getPref().get(0);
+				
+				//Assuming the highest ranked is already matched then check preferences ...
+				else if(cc <= c) {
+					
+					System.out.println(highest.getName() + " is full...running part 2!");
+					System.out.println(highest.getName() + " Preference is " + highest.getPref().get(cc).getName());
 						
-						System.out.println("matching (favorite) "+ favorite.getName() + " with "+ highest.getName());
-						
-						if(favorite.getOpenPositions() == 0){
-							favorite.fill(highest);
-						}
-					} 
-					else {
-						break;
-					}// end else
+						//If the highest preference list is not the applicant we are using....
+						if(highest.getPref().get(cc) != a) {
+							
+								applicant lowest = highest.getLowestApplicant();
+								System.out.println(highest.getName() + " Is Going to remove " + highest.getLowestApplicant().getName());
+								
+								//remove applicant and fill with the applicant that is preffered
+								highest.remove(lowest);
+								System.out.println("matching (favorite) "+ highest.getName() + " with "+ a.getName());
+								highest.fill(a);
+								
+								//this takes the lowest removed applicant and checks to see if any departments prefer him 
+								for (dept d : depts) {
+									
+									ArrayList<applicant> apps2 = d.getOpenings();
+									
+									for(applicant a2 : apps2) {
+										
+										if(d.getPref().indexOf(lowest) < d.getPref().indexOf(a2) ) {
+											
+											System.out.println(d.getName() + " likes " + lowest.getName() + " more than" + a2.getName());
+											System.out.println("So on that note do not hire.. " + d.getLowestApplicant().getName());
+											
+											if(d.getOpenPositions() == 0) {
+												
+												d.remove(d.getLowestApplicant());
+											}
+											
+												d.fill(lowest);
+												break;
+										}
+									}
+								}
+								
+						} 
+						++cc;
 				}
 			
 			++c;	
+				if(cc >= c) {
+					System.out.println("BREAK!");
+					//if preferences are becoming reversed (useless comparison)
+					break;
+				}
 			}// end while
 		}// end for
+		System.out.println("Done matching things together...");
 	}
 
 	/*
@@ -144,7 +183,7 @@ public class main {
 		// run loop while there are still depts w/o matches
 		while( openDepts.size() != 0 ){
 			for( applicant currentApp : apps ){
-				int appindex = 0;
+				//int appindex = 0;
 				//applicant currentApp = openApps.get(appindex);
 				System.out.println("[debug] currentApp: "+currentApp.getName());	// debug
 				// don't use currentApp if it is already assigned
@@ -178,11 +217,13 @@ public class main {
 								+ " vs "+tempDept.getLowestFilledRank());	// debug
 						
 						applicant lower = tempDept.getLowestApplicant();
+						System.out.println("Lower is " + lower.getName());
 						openApps.add(lower);
-						if(tempDept.remove(lower) == false){
+						/*if(tempDept.remove(lower) == false){
 							System.out.println("[debug] error: "+lower.getName()+" not in assigned positions");
-						}
+						}*/
 						tempDept.fill(currentApp);
+						System.out.println("[debug] " + tempDept.getName() +  " Just received " + currentApp.getName());
 							
 					}
 					
