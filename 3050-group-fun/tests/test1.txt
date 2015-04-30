@@ -1,0 +1,104 @@
+Vacancies and Departments
+
+2 AAA
+1 BBB
+3 CCC
+
+Job Applicants
+
+Tim_f Tim_l
+Bob_f Bob_l
+Steve_f Steve_l
+Tom_f Tom_l
+Bill_f Bill_l
+Adam_f Adam_l
+Mary_f Mary_l
+Laura_f Laura_l
+Jane_f Jane_l
+Kate_f Kate_l
+
+
+Preferences AAA
+
+Tim_f Tim_l
+Bob_f Bob_l
+Bill_f Bill_l
+Adam_f Adam_l
+Mary_f Mary_l
+Laura_f Laura_l
+
+Preferences BBB
+
+Jane_f Jane_l
+Kate_f Kate_l
+Bill_f Bill_l
+Tom_f Tom_l
+Tim_f Tim_l
+
+Preferences CCC
+
+Kate_f Kate_l
+Jane_f Jane_l
+Laura_f Laura_l
+Mary_f Mary_l
+Adam_f Adam_l
+Bill_f Bill_l
+Tom_f Tom_l
+Steve_f Steve_l
+Bob_f Bob_l
+Tim_f Tim_l
+
+Preferences Tim_f Tim_l
+
+AAA
+BBB
+CCC
+
+Preferences Bob_f Bob_l
+
+BBB
+CCC
+AAA
+
+Preferences Steve_f Steve_l
+
+BBB
+
+Preferences Tom_f Tom_l
+
+CCC
+BBB
+
+Preferences Bill_f Bill_l
+
+AAA
+BBB
+CCC
+
+Preferences Adam_f Adam_l
+
+CCC
+BBB
+AAA
+
+Preferences Mary_f Mary_l
+
+AAA
+CCC
+
+Preferences Laura_f Laura_l
+
+BBB
+AAA
+
+Preferences Jane_f Jane_l
+
+BBB
+
+Preferences Kate_f Kate_l
+
+AAA
+BBB
+CCC
+
+END INPUT

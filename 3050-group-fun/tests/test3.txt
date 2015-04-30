@@ -1,0 +1,51 @@
+Vacancies and Departments
+
+2 AAA
+2 BBB
+
+Job Applicants
+
+Tom_f Tom_l
+Bill_f Bill_l
+Adam_f Adam_l
+Mary_f Mary_l
+Laura_f Laura_l
+
+Preferences AAA
+
+Adam_f Adam_l
+Mary_f Mary_l
+Laura_f Laura
+
+Preferences BBB
+
+Bill_f Bill_l
+Tom_f Tom_l
+Laura_f Laura
+
+Preferences Tom_f Tom_l
+
+AAA
+BBB
+
+Preferences Bill_f Bill_l
+
+AAA
+BBB
+
+Preferences Adam_f Adam_l
+
+BBB
+AAA
+
+Preferences Mary_f Mary_l
+
+BBB
+AAA
+
+Preferences Laura_f Laura_l
+
+AAA
+BBB
+
+END INPUT
