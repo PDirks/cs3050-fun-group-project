@@ -19,9 +19,9 @@ public class main {
 		/*
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter name of file to read: ");
-		input = sc.nextLine();
+		input = "./tests/" + sc.nextLine();
 		*/
-		input = "test.txt";
+		input = "./tests/test0.txt";
 		reader read = new reader( input );
 
 		read.readFile( read.getFile() );
@@ -64,11 +64,12 @@ public class main {
 				//Counters used to compare preferences
 				int c = 0;
 				int cc = 0;
+				
+				// get highest ranked dept for applicant index c
 				dept highest = a.getPref().get(c);
 
-				//If highest ranking dept is free for the applicant...
+				//If highest ranking dept is free for the applicant fill assign applicant to postition
 				if(highest.getOpenPositions() != 0)	 {
-					
 					highest.fill(a);
 					System.out.println("matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
 				} 
@@ -110,12 +111,12 @@ public class main {
 												d.fill(lowest);
 												break;
 										}
-									}
-								}
+									}// end foreach applicants
+								}// end foreach depts
 								
-						} 
+						}// end if highest preference is not current applicant 
 						++cc;
-				}
+				}// end cc vs c check
 			
 			++c;	
 				if(cc >= c) {
