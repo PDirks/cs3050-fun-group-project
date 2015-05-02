@@ -16,14 +16,14 @@ public class main {
 		 * let user input which file to work on, for now we'll railroad it to "test.txt", but will need to have
 		 * interactivity for the final submission build
 		 */
-		/*
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter name of file to read: ");
 		input = "./tests/" + sc.nextLine();
+		/*
+		input = "./tests/test1.txt";
 		*/
-		input = "./tests/test0.txt";
 		reader read = new reader( input );
-
 		read.readFile( read.getFile() );
 		
 		ArrayList<applicant> apps = read.getApps();
@@ -45,16 +45,20 @@ public class main {
 			dd.printHires();
 		}
 		
-		System.out.println("done");
+		System.out.println("[debug] done");
 		
 	}// end main
 
 	/*
 	 * matcher():
 	 * Algorithm based on the wiki page with a few additions - i feel like this is close to perfect...I hope
+	 * 
+	 * some things to work on:
+	 * 	- will assign applicant to multiple dept (see test3)
+	 *  - will leave positions unfilled (see test1)
 	 */
 	static void matcher(ArrayList<applicant> apps, ArrayList<dept> depts) {
-		System.out.println("Running the matching algorithm....\n\n");
+		System.out.println("[debug] Running the matching algorithm....\n\n");
 		
 		//For all applicants....
 		for( applicant a : apps ){
@@ -69,39 +73,49 @@ public class main {
 				dept highest = a.getPref().get(c);
 
 				//If highest ranking dept is free for the applicant fill assign applicant to postition
-				if(highest.getOpenPositions() != 0)	 {
+				// need to first check that a is not already assigned too
+				if(highest.getOpenPositions() != 0 && a.getAssigned() == false)	 {
 					highest.fill(a);
-					System.out.println("matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
+					System.out.println("[debug] matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
 				} 
-				
 				//Assuming the highest ranked is already matched then check preferences ...
 				else if(cc <= c) {
 					
-					System.out.println(highest.getName() + " is full...running part 2!");
-					System.out.println(highest.getName() + " Preference is " + highest.getPref().get(cc).getName());
+					System.out.println("[debug] "+highest.getName() + " is full...running part 2!");
+					System.out.println("[debug] "+highest.getName() + " Preference is " + highest.getPref().get(cc).getName());
 						
 						//If the highest preference list is not the applicant we are using....
 						if(highest.getPref().get(cc) != a) {
-							
+								
 								applicant lowest = highest.getLowestApplicant();
-								System.out.println(highest.getName() + " Is Going to remove " + highest.getLowestApplicant().getName());
+								System.out.println("[debug] "+highest.getName() + " Is Going to remove " + highest.getLowestApplicant().getName());
 								
 								//remove applicant and fill with the applicant that is preffered
+								System.out.println("[debug] removing (lowest) "+lowest.getName());
 								highest.remove(lowest);
-								System.out.println("matching (favorite) "+ highest.getName() + " with "+ a.getName());
-								highest.fill(a);
+								System.out.println("[debug] sanity check, printing filled positions...");
+								highest.printHires();
 								
+								System.out.println("[debug] matching (favorite) "+ highest.getName() + " with "+ a.getName());
+								highest.fill(a);
+								System.out.println("[debug] sanity check, printing filled positions...");
+								highest.printHires();
+								dept oldDept = highest;
 								//this takes the lowest removed applicant and checks to see if any departments prefer him 
 								for (dept d : depts) {
 									
+									// don't want to bother checking the previous department
+									if(d.equals(oldDept)){
+										continue;
+									}
 									ArrayList<applicant> apps2 = d.getOpenings();
 									
 									for(applicant a2 : apps2) {
 										
-										if(d.getPref().indexOf(lowest) < d.getPref().indexOf(a2) ) {
+										if(d.getOpenings().indexOf(lowest) < d.getOpenings().indexOf(a2) ) {
 											
-											System.out.println(d.getName() + " likes " + lowest.getName() + " more than" + a2.getName());
-											System.out.println("So on that note do not hire.. " + d.getLowestApplicant().getName());
+											System.out.println("[debug] "+d.getName() + " likes " + lowest.getName() + " more than" + a2.getName());
+											System.out.println("[debug]" +"So on that note do not hire.. " + d.getLowestApplicant().getName());
 											
 											if(d.getOpenPositions() == 0) {
 												
@@ -120,14 +134,14 @@ public class main {
 			
 			++c;	
 				if(cc >= c) {
-					System.out.println("BREAK!");
+					System.out.println("[debug] BREAK!");
 					//if preferences are becoming reversed (useless comparison)
 					break;
 				}
 			}// end while
 		}// end for
-		System.out.println("Done matching things together...");
-	}
+		System.out.println("[debug] Done matching things together...");
+	}// end matcher
 
 	/*
 	 * deptMatcher():

@@ -27,12 +27,20 @@ public class dept {
 		pref.add(a);
 	}
 	
-	void fill(applicant a){
+	/*
+	 * fill() - fills position with given applicant, returns false if dept already full
+	 * input:	applicant to fill
+	 */
+	boolean fill(applicant a){
+		if(open == 0){
+			return false;
+		}
+		
 		openings.add(a);	// assigns applicant
 		a.setAssigned(true);
 		open -= 1;	// decrease opening positions
 		
-		
+		return true;
 		//Commenting this out for now so I can try something...
 		/*if( lowestFilledRank < pref.lastIndexOf(a)){	// update lowestFilledRank
 			lowestFilledRank = pref.lastIndexOf(a);
