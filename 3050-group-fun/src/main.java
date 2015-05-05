@@ -58,7 +58,7 @@ public class main {
 	 *  - will leave positions unfilled (see test1)
 	 */
 	static void matcher(ArrayList<applicant> apps, ArrayList<dept> depts) {
-		System.out.println("[debug] Running the matching algorithm....\n\n");
+	//	System.out.println("[debug] Running the matching algorithm....\n\n");
 		
 		//For all applicants....
 		for( applicant a : apps ){
@@ -76,29 +76,29 @@ public class main {
 				// need to first check that a is not already assigned too
 				if(highest.getOpenPositions() != 0 && a.getAssigned() == false)	 {
 					highest.fill(a);
-					System.out.println("[debug] matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
+				//	System.out.println("[debug] matching (highest) "+ highest.getName()+" with "+ a.getName());	// debug
 				} 
 				//Assuming the highest ranked is already matched then check preferences ...
 				else if(cc <= c) {
 					
-					System.out.println("[debug] "+highest.getName() + " is full...running part 2!");
-					System.out.println("[debug] "+highest.getName() + " Preference is " + highest.getPref().get(cc).getName());
+				//	System.out.println("[debug] "+highest.getName() + " is full...running part 2!");
+				//	System.out.println("[debug] "+highest.getName() + " Preference is " + highest.getPref().get(cc).getName());
 						
 						//If the highest preference list is not the applicant we are using....
 						if(highest.getPref().get(cc) != a) {
 								
 								applicant lowest = highest.getLowestApplicant();
-								System.out.println("[debug] "+highest.getName() + " Is Going to remove " + highest.getLowestApplicant().getName());
+							//	System.out.println("[debug] "+highest.getName() + " Is Going to remove " + highest.getLowestApplicant().getName());
 								
 								//remove applicant and fill with the applicant that is preffered
-								System.out.println("[debug] removing (lowest) "+lowest.getName());
+							//	System.out.println("[debug] removing (lowest) "+lowest.getName());
 								highest.remove(lowest);
-								System.out.println("[debug] sanity check, printing filled positions...");
+							//	System.out.println("[debug] sanity check, printing filled positions...");
 								highest.printHires();
 								
-								System.out.println("[debug] matching (favorite) "+ highest.getName() + " with "+ a.getName());
+							//	System.out.println("[debug] matching (favorite) "+ highest.getName() + " with "+ a.getName());
 								highest.fill(a);
-								System.out.println("[debug] sanity check, printing filled positions...");
+							//	System.out.println("[debug] sanity check, printing filled positions...");
 								highest.printHires();
 								dept oldDept = highest;
 								//this takes the lowest removed applicant and checks to see if any departments prefer him 
@@ -114,8 +114,8 @@ public class main {
 										
 										if(d.getOpenings().indexOf(lowest) < d.getOpenings().indexOf(a2) ) {
 											
-											System.out.println("[debug] "+d.getName() + " likes " + lowest.getName() + " more than" + a2.getName());
-											System.out.println("[debug]" +"So on that note do not hire.. " + d.getLowestApplicant().getName());
+											//System.out.println("[debug] "+d.getName() + " likes " + lowest.getName() + " more than" + a2.getName());
+											//System.out.println("[debug]" +"So on that note do not hire.. " + d.getLowestApplicant().getName());
 											
 											if(d.getOpenPositions() == 0) {
 												
@@ -140,7 +140,7 @@ public class main {
 				}
 			}// end while
 		}// end for
-		System.out.println("[debug] Done matching things together...");
+		//System.out.println("[debug] Done matching things together...");
 	}// end matcher
 
 	/*

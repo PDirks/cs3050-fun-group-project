@@ -1,0 +1,49 @@
+Vacancies and Departments
+
+1 AAA
+1 BBB
+1 CCC
+
+Job Applicants
+
+John Doe
+Jane Doe
+Max Doe
+
+Preferences AAA
+
+John Doe
+Jane Doe
+Max Doe
+
+Preferences BBB
+
+Jane Doe
+Max Doe
+John Doe
+
+Preferences CCC
+
+Max Doe
+Jane Doe
+John Doe
+
+Preferences John Doe
+
+AAA
+BBB
+CCC
+
+Preferences Jane Doe
+
+BBB
+CCC
+AAA
+
+Preferences Max Doe
+
+CCC
+AAA
+BBB
+
+END INPUT
