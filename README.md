@@ -55,7 +55,7 @@ before preferences of A 2 .
 
 --- 
 
-*the following is an exerpt from project-report.pdf*
+*the following is an exerpt from [project-report.pdf](https://github.com/PDirks/cs3050-fun-group-project/blob/master/project-report.pdf)*
 
 ###Pseudocode of our solution
 
