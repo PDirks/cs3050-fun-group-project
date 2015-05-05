@@ -52,3 +52,36 @@ Furthermore, if applicant A 1 is listed before applicant A 2 in “Job Applicant
 before preferences of A 2 .
 * The input ends with a line with the keyword “END INPUT.”
 * sample file found [here](https://raw.githubusercontent.com/PDirks/cs3050-fun-group-project/master/requirements/test.txt?token=AGaMKe7HYRC7tKU8kFC3W7oavtjJO_PXks5VJqKWwA%3D%3D)
+
+--- 
+
+*the following is an exerpt from project-report.pdf*
+
+###Pseudocode of our solution
+
+```
+for each applicant a
+    while a is not assigned
+        if a’s top preference has an open spot
+            assign a to the job
+        else
+          if a’s top preference has a different top pick
+            let dept’s lowest pick be l
+            swap l with a
+            for all depts d
+              check all the d’s assignments
+              if d prefers l over any filled pick
+                swap l with the lowest pick
+              else
+                break while
+```
+###Solution Analysis
+    
+The worst-case scenario of this algorithm would occur if every assignment (after the initial propagation of assignments) were to require a search through a department’s current picks and eventually a swap of the lowest hire with a given applicant. Since every applicant could be second-guessed by another applicant, we find our worst-case complexity to be O( n^2 ).
+
+###Running the Program
+
+1. In eclipse, import the project “3050-group-fun” as an existing project in the workspace
+2. run the program 
+3. The user will then be prompted to enter a file as input. The program is directed to read from the “test” folder. For example, to run test4.txt, one would enter “test4.txt” at the prompt.
+4. At the end of execution, the program should print the read applicants, the preferences of the applicants, and the new hires for each department.
